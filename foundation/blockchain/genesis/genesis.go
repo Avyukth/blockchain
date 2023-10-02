@@ -2,6 +2,7 @@ package genesis
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"time"
 )
@@ -19,6 +20,8 @@ type Genesis struct {
 // =========================================================================================================================
 
 func Load() (Genesis, error) {
+	// dir,_:= os.Getwd()
+	// fmt.Println("Load() called" , dir)
 	path := "zblock/genesis.json"
 	content, err := os.ReadFile(path)
 	if err != nil {

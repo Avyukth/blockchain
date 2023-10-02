@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/ardanlabs/blockchain/app/services/node/handlers"
+	"github.com/ardanlabs/blockchain/foundation/blockchain/genesis"
 	"github.com/ardanlabs/blockchain/foundation/logger"
 	"github.com/ardanlabs/conf/v3"
 	"go.uber.org/zap"
@@ -113,6 +114,14 @@ func run(log *zap.SugaredLogger) error {
 			log.Errorw("shutdown", "status", "debug v1 router closed", "host", cfg.Web.DebugHost, "ERROR", err)
 		}
 	}()
+
+	// =========================================================================
+	// Blockchain Support
+	gen, err := genesis.Load()
+	if err != nil {
+		return fmt.Errorf("could not load genesis: %w", err)
+	}
+	log.Infow("startup", "genesis", gen)
 
 	// =========================================================================
 	// Service Start/Stop Support
