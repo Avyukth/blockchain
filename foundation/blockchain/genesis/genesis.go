@@ -2,7 +2,6 @@ package genesis
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"time"
 )
